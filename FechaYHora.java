@@ -10,29 +10,20 @@
  */
 public class FechaYHora
 {
-    // save the minutes
-    private NumberDisplay minutes;
-    // save the hours
-    private NumberDisplay hours;
-    // save the day
-    private NumberDisplay day;
-    // save the month
-    private NumberDisplay month;
-    // save the year
-    private NumberDisplay year;
+    //save the clock
+    private ClockDisplay clock;
+    // save calendar
+    private CalendarioBasico calendar;
     // save the date and time in a text chain
     private String displayString;
 
    /**
     * Constructor for objects of class FechaYHora
-   */
+    */
    public FechaYHora()
     {
-        minutes = new NumberDisplay(60);
-        hours = new NumberDisplay(24);
-        day = new NumberDisplay(31);
-        month = new NumberDisplay(13);
-        year = new NumberDisplay(100);
+        calendar = new CalendarioBasico();
+        clock =  new ClockDisplay();
         updateDisplay();
     }
 
@@ -41,14 +32,26 @@ public class FechaYHora
      */
     private void updateDisplay()
     {
-        displayString = day.getDisplayValue() + "-" + 
-                        month.getDisplayValue() + "-" +
-                        year.getDisplayValue() + " " +
-                        hours.getDisplayValue() + ":" +
-                        minutes.getDisplayValue();
+        displayString =  calendar.obtenerFecha() + " " + clock.getTime();
     }
     
-    /**
-     * 
-     */
+   /**
+    * Return the current time of this display in the format HH:MM.
+    */
+   public String getFechaYHora()
+    {
+        return displayString;
+    }
+    
+   /**
+    * 
+    */ 
+   public void avanzar()
+   {
+       clock.timeTick();
+       if (clock.hours.getValue() == 0)
+       {
+           calendar.avanzarFecha();
+       }
+   }
 }
