@@ -43,15 +43,25 @@ public class FechaYHora
         return displayString;
     }
     
+    
    /**
+     * Set the time and the date
+     */
+    public void fijarFechaYHora(int setMin,int setHour, 
+                                int setDay, int setMonth, int setYear)
+    {
+        clock.setTime(setHour,setMin);
+        calendar.fijarFecha (setDay, setMonth,setYear);
+    }
+    /**
     * 
     */ 
    public void avanzar()
    {
        clock.timeTick();
-       if (clock.hours.getValue() == 0)
-       {
+       if (clock.getHours() == 0){
            calendar.avanzarFecha();
-       }
+        }
+        updateDisplay();
    }
 }
